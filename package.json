@@ -5,5 +5,12 @@
   "main": "index.js",
   "repository": "https://github.com/therealedsheenan/spotishare.git",
   "author": "therealedsheenan <private.sheenantenepre@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "querystring": "^0.2.0",
+    "request": "^2.81.0",
+    "spotify-web-api-js": "^0.22.0"
+  }
 }
