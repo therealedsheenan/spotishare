@@ -1,0 +1,9 @@
+{
+  "name": "spotishare",
+  "version": "1.0.0",
+  "description": "Sharing spotify music",
+  "main": "index.js",
+  "repository": "https://github.com/therealedsheenan/spotishare.git",
+  "author": "therealedsheenan <private.sheenantenepre@gmail.com>",
+  "license": "MIT"
+}
