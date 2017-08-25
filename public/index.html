@@ -19,11 +19,13 @@
   <body>
     <div class="container">
       <div id="login">
-        <h1>This is an example of the Authorization Code flow</h1>
-        <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <h1>Spotishare</h1>
+        <a href="/login" class="btn btn-primary">Start</a>
       </div>
-      <div id="loggedin">
+      <div id="loggedin">j
         <div id="user-profile">
+        </div>
+        <div id="currently-playing">
         </div>
         <div id="oauth">
         </div>
@@ -80,7 +82,8 @@
 
         var userProfileSource = document.getElementById('user-profile-template').innerHTML,
             userProfileTemplate = Handlebars.compile(userProfileSource),
-            userProfilePlaceholder = document.getElementById('user-profile');
+            userProfilePlaceholder = document.getElementById('user-profile'),
+            currentlyPlaying = document.getElementById('currently-playing');
 
         var oauthSource = document.getElementById('oauth-template').innerHTML,
             oauthTemplate = Handlebars.compile(oauthSource),
@@ -91,6 +94,8 @@
         var access_token = params.access_token,
             refresh_token = params.refresh_token,
             error = params.error;
+
+
 
         if (error) {
           alert('There was an error during the authentication');
@@ -103,16 +108,26 @@
             });
 
             $.ajax({
-                url: 'https://api.spotify.com/v1/me',
-                headers: {
-                  'Authorization': 'Bearer ' + access_token
-                },
-                success: function(response) {
-                  userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+              url: 'https://api.spotify.com/v1/me',
+              headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+              success: function(response) {
+                userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
-                  $('#login').hide();
-                  $('#loggedin').show();
-                }
+                $('#login').hide();
+                $('#loggedin').show();
+              }
+            });
+
+            $.ajax({
+              url: 'https://api.spotify.com/v1/me/player/currently-playing',
+              headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+              success: function(response) {
+                window.location.replace(response.item.external_urls.spotify);
+              }
             });
           } else {
               // render initial screen
